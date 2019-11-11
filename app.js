@@ -46,12 +46,15 @@ Item.insertMany(defaultItems , function(err){
     console.log("Successfully added items to DB.");
   }
 });
-const items = ["Buy Food", "Cook Food", "Eat Food"];
-const workItems = [];
+
 
 app.get("/", function(req, res) {
 
-  res.render("list", {listTitle: "Today" , newListItems: items});
+  Item.find({} , function(err, founditems){
+
+    res.render("list", {listTitle: "Today" , newListItems: ()});
+    
+  });
 
 });
 
