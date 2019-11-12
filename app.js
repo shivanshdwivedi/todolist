@@ -56,13 +56,11 @@ app.get("/", function(req, res) {
       }
     });
     res.redirect("/");
-  
   }else{
 
       res.render("list", {listTitle: "Today" , newListItems: founditems});
     }
   });
-
   });
 
 app.post("/", function(req, res){
@@ -72,8 +70,11 @@ app.post("/", function(req, res){
     name : itemName
   });
 item.save();
-res.redirect("/");
-  
+res.redirect("/"); 
+});
+
+app.post("/delete",function(req,res){
+  console.log(req.body);
 });
 
 app.get("/work", function(req,res){
