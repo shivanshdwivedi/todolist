@@ -68,9 +68,11 @@ app.get("/", function(req, res) {
   });
   });
 
+//For posting New Item On Home and Dynamic Route
 app.post("/", function(req, res){
 
   const itemName = req.body.newItem;
+  const listName = req.body.list;
   const item = new Item({
     name : itemName
   });
@@ -78,6 +80,7 @@ item.save();
 res.redirect("/"); 
 });
 
+//For deleting items 
 app.post("/delete",function(req,res){
   const checkedId = req.body.checkbox;
   Item.findByIdAndRemove(checkedId , function(err){
@@ -93,15 +96,16 @@ app.post("/delete",function(req,res){
   });
 });
 
+//For making Dynamic lists
 app.get("/:postName" , function(req,res){
 
   const postName = req.params.postName;
 
-  List.findOne({name:postName} , function(err , foundlist){
+  List.findOne({name:postName} , function(err , foundlist){   //For finding name of javascript objects and returing value as foundlist
     if(!err){
       if(!foundlist){
         //create a new list
-        const list = new List({
+        const list = new List({     
           name: postName,
           items: defaultItems
         });
@@ -110,7 +114,7 @@ app.get("/:postName" , function(req,res){
       }
       else{
         //show an existing list
-        res.render("list" , {listTitle: foundlist.name , newListItems: foundlist.items});
+        res.render("list" , {listTitle: foundlist.name , newListItems: foundlist.items});  
       }
     }
   });
