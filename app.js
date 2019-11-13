@@ -121,7 +121,7 @@ app.post("/delete",function(req,res){
 //For making Dynamic lists
 app.get("/:postName" , function(req,res){
 
-  const postName = req.params.postName;
+  const postName = _.capitalize(req.params.postName);
 
   List.findOne({name:postName} , function(err , foundlist){   //For finding name of javascript objects and returing value as foundlist
     if(!err){
